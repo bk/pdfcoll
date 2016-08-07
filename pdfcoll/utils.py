@@ -8,6 +8,7 @@ import sys
 import re
 import HTMLParser
 import translitcodec
+import hashlib
 
 
 def slugify(s, fallback=u'missingslug', join_with='-', max_len=40):
@@ -33,9 +34,19 @@ def unescape_entities(html):
     h = HTMLParser.HTMLParser()
     return h.unescape(html)
 
+
 def vprint(msg):
     "Prints to stderr - like `warn` in perl"
     sys.stderr.write(msg + "\n")
+
+
+def sha1sum(fn):
+    """
+    Returns the SHA1 hexdigest of the contents of a file.
+    Not suitable for very large files.
+    """
+    with open(fn) as f:
+        return hashlib.sha1(f.read()).hexdigest()
 
 
 # The following is from http://code.activestate.com/recipes/579097-safely-and-atomically-write-to-a-file/
