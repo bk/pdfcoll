@@ -7,8 +7,8 @@ further information.
 Submodules and their status:
 
 - meta: Complete
-- sqlite_fts: Read-only support complete; write support not implemented
-- archiver: Not implemented
+- sqlite_fts: Complete
+- archiver: Complete
 - config, utils: Have no direct counterpart in Perl modules
 - command line scripts: Not implemented
 """
