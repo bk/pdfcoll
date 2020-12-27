@@ -6,8 +6,8 @@ import os
 import glob
 import ftfy
 
-from pdfcoll import config
-from pdfcoll.utils import slugify, vprint, atomic_write
+from . import config
+from .utils import slugify, vprint, atomic_write
 
 
 """
@@ -147,7 +147,7 @@ class Meta(object):
         try:
             f = open(fn)
             return f.read().decode('utf-8')
-        except IOError, e:
+        except IOError as e:
             if self.verbose:
                 vprint('WARNING: ' + e)
             return None

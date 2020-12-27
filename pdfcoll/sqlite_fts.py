@@ -7,11 +7,11 @@ import glob
 import ftfy
 import sqlite3
 from collections import OrderedDict
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
-from pdfcoll import config
-from pdfcoll.utils import slugify, vprint
-from pdfcoll.meta import Meta
+from . import config
+from .utils import slugify, vprint
+from .meta import Meta
 
 
 def sql_quote(s):
@@ -292,7 +292,7 @@ class FTS(object):
         sd = sha1[:2]
         dirname = os.path.join(self.basedir, sd, sha1)
         if not os.path.isdir(dirname):
-            print "WARNING:", dirname, "not found: not indexed"
+            print("WARNING:", dirname, "not found: not indexed")
             return
         # assumes that nothing in dir will change without either
         # adding/removing a file or updating meta.yml

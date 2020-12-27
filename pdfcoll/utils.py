@@ -6,7 +6,7 @@ import stat
 import tempfile
 import sys
 import re
-import HTMLParser
+from html.parser import HTMLParser
 import translitcodec
 import hashlib
 
@@ -31,7 +31,7 @@ def unescape_entities(html):
     "Converts HTML entities (named as well as numeric) to Unicode"
     if not html:
         return ''
-    h = HTMLParser.HTMLParser()
+    h = HTMLParser()
     return h.unescape(html)
 
 

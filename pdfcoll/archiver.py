@@ -5,7 +5,7 @@ import datetime
 import os
 import shutil
 import yaml
-import urllib2
+from urllib.request import Request, urlopen
 import json
 import subprocess
 
@@ -13,10 +13,10 @@ import bibtexparser
 from bibtexparser.bparser import BibTexParser
 from bibtexparser.customization import convert_to_unicode
 
-from pdfcoll.meta import Meta, MetaItem
-from pdfcoll.sqlite_fts import FTS
-from pdfcoll.utils import sha1sum
-from pdfcoll import config
+from .meta import Meta, MetaItem
+from .sqlite_fts import FTS
+from .utils import sha1sum
+from . import config
 
 
 def maybe_bibrec(bibrec):
@@ -218,10 +218,10 @@ class Archiver(object):
         mi['doi_is_auto'] = True
         bib = None
         bibkey = None
-        req = urllib2.Request(
+        req = Request(
             'http://dx.doi.org/' + doi,
             headers={'Accept': 'text/bibliography; style=bibtex'})
-        content = urllib2.urlopen(req).read()
+        content = urlopen(req).read()
         if content:
             bib = maybe_bibrec(content)
             if bib:
@@ -242,7 +242,7 @@ class Archiver(object):
         data = None
         # Gets data from Google Books
         url = 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn
-        content = urllib2.urlopen(url).read()
+        content = urlopen(url).read()
         if content:
             try:
                 data = json.loads(content)
@@ -254,7 +254,7 @@ class Archiver(object):
         else:
             # Fallback: get data from ottobib.com
             url = "http://www.ottobib.com/isbn/" + isbn + "/bibtex"
-            content = urllib2.urlopen(url).read()
+            content = urlopen(url).read()
             if content and content.find('textarea') > -1:
                 content = re.sub(r'^[\S\s]*<textarea[^>]+>', '', content)
                 content = re.sub(r'</textarea>[\S\s]*$', '', content)
