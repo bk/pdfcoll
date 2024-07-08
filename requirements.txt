@@ -11,7 +11,7 @@ ftfy==5.8
 future==0.18.3
 html5lib==1.0.1
 HTMLParser==0.0.2
-idna==2.8
+idna==3.7
 ipaddr==2.2.0
 lockfile==0.12.2
 msgpack==0.6.2
